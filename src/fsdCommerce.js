@@ -1,35 +1,33 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import { Row,Col } from "react-bootstrap";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import { Row, Col } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 import ProductDetails from "./productDetails";
 import { Link } from "react-router-dom";
 
+const Commerce = () => {
+  const [data, setData] = useState();
+  const [img, setImg] = useState();
 
-const Commerce=()=>{
-const [data,setData]=useState();
-const [img,setImg]=useState()
+  const dataFetch = async () => {
+    const apiData = await axios.get("https://fakestoreapi.com/products");
+    console.log(apiData.data);
+    setData(apiData?.data);
+    //   const imgData= await  axios.get('https://fakestoreapi.com/products')
+    // setImg(imgData.data)
+  };
+  useEffect(() => {
+    dataFetch();
+  }, []);
 
-
-     const dataFetch=async()=>{
-      const apiData= await axios.get('https://fakestoreapi.com/products')
-      setData(apiData?.data)
-      //   const imgData= await  axios.get('https://fakestoreapi.com/products')
-      // setImg(imgData.data)
-        
-     }
-    useEffect(()=>{
-      dataFetch()
-    },[])
-
-    console.log("sandy is a gangster",data)
-    return(
-        <div>
-             {/* <Navbar bg="danger" data-bs-theme="dark" fixed="top" className="mb-5">
+  console.log("sandy is a gangster", data);
+  return (
+    <div>
+      {/* <Navbar bg="danger" data-bs-theme="dark" fixed="top" className="mb-5">
         <Container>
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>
           <Nav className="me-auto">
@@ -39,36 +37,34 @@ const [img,setImg]=useState()
           </Nav>
         </Container>
       </Navbar> */}
-            {
-              data? <Row className="my-5">
-                    {
-                         data.map((item)=>{
-                            return (
-                            
-                                <Col md={3}>
+      {data ? (
+        <Row className="my-5">
+          {data.map((item) => {
+            return (
+              <Col md={3} key={item.id}>
+                <Card
+                  className="mt-3"
+                  style={{ width: "18rem" }}
+                  height={"500px"}
+                >
+                  <Card.Img variant="top" src={item?.image} height={"250px"} />
+                  <Card.Body>
+                    <Card.Title>{item?.title}</Card.Title>
+                    <Card.Text>{item?.description}</Card.Text>
+                    <Link to={`productDetail/${item?.id}`}>
+                      <Button variant="primary">Go to product details</Button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </div>
+  );
+};
 
-                                    <Card className="mt-3" style={{ width: '18rem' }} height={'500px'}>
-                                <Card.Img variant="top" src={item?.image} height={'250px'}  />
-                                <Card.Body>
-                                  <Card.Title>{item?.title}</Card.Title>
-                                  <Card.Text>
-                                    {item?.description}
-                                  </Card.Text>
-                                  <Link to={'productDetails/:id'}><Button  variant="primary">Go to product details</Button></Link> 
-                                </Card.Body>
-                              </Card>
-                              </Col>
-     
-                                
-                               
-                            )
-                        })
-                    }
-              </Row>
-               : <div>Loading...</div>
-            }
-        </div>
-    )
-}
-
-export default Commerce
+export default Commerce;
