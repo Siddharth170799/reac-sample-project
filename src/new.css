@@ -1,0 +1,35 @@
+.body{
+    height:100vh;
+    background-color: burlywood;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.rectanglered{
+    height: 400px;
+    width: 300px;
+    background-color: red;
+    border: 8px solid green;
+    position: relative;
+}
+.rectangleaqua{
+    height: 400px;
+    width: 300px;
+    background-color: rgb(0,234,255);
+    border: 8px solid green;
+    position: relative;
+}
+
+.circle{
+    height: 100px;
+    width: 100px;
+    border: 5px solid black;
+    background-color: blue;
+    border-radius: 50%;
+    position: absolute;
+    top: -45px;
+    right: -45px;
+}
