@@ -51,7 +51,7 @@ const Commerce = () => {
                   <Card.Body>
                     <Card.Title>{item?.title}</Card.Title>
                     <Card.Text>{item?.description}</Card.Text>
-                    <Link to={`productDetail/${item?.id}`}>
+                    <Link to={`/productDetail/${item?.id}`}>
                       <Button variant="primary">Go to product details</Button>
                     </Link>
                   </Card.Body>

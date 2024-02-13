@@ -6,7 +6,7 @@ import Card from "react-bootstrap/Card";
 function ProductDetails() {
   const [data, setData] = useState();
   const param = useParams();
-  console.log("nlaskndlkanlkds" + param.id);
+  // console.log("nlaskndlkanlkds" + param.id);
   async function fetchProductDetail() {
     const productData = await axios.get(
       `https://fakestoreapi.com/products/${param.id}`
